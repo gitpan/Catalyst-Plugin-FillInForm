@@ -4,7 +4,7 @@ use strict;
 use NEXT;
 use HTML::FillInForm;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -29,7 +29,10 @@ Fill forms automatically.
 sub finalize {
     my $c = shift;
     if ( $INC{'Catalyst/Plugin/FormValidator.pm'} ) {
-        $c->fillform if ( $c->form->has_missing || $c->form->has_invalid );
+        $c->fillform
+          if $c->form->has_missing
+          || $c->form->has_invalid
+          || $c->stash->{error};
     }
     return $c->NEXT::finalize(@_);
 }

@@ -1,4 +1,7 @@
 Revision history for Perl extension Catalyst::Plugin::FillInForm.
 
+0.02  Thu Feb 03 02:00:00 2005
+        - $c->stash->{error} support
+
 0.01  Fri Jan 28 22:00:00 2005
         - first release
