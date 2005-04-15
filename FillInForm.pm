@@ -4,7 +4,7 @@ use strict;
 use NEXT;
 use HTML::FillInForm;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 NAME
 
@@ -24,6 +24,9 @@ Fill forms automatically.
 
 =head3 finalize
 
+Will automatically fill in forms if the last form has missing/
+invalid fields.
+
 =cut
 
 sub finalize {
@@ -41,7 +44,7 @@ sub finalize {
 
 =head3 fillform
 
-Fill form.
+Fill form based on request parameters.
 
 =cut
 
@@ -57,11 +60,12 @@ sub fillform {
 
 =head1 SEE ALSO
 
-L<Catalyst>.
+L<Catalyst>, L<HTML::FillInForm> .
 
 =head1 AUTHOR
 
 Sebastian Riedel, C<sri@cpan.org>
+Marcus Ramberg, C<mramberg@cpan.org>
 
 =head1 COPYRIGHT
 
