@@ -4,7 +4,7 @@ use strict;
 use NEXT;
 use HTML::FillInForm;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
@@ -46,14 +46,19 @@ sub finalize {
 
 Fill form based on request parameters.
 
+    $c->fillform;
+    $c->fillform( \%parameters );
+
 =cut
 
 sub fillform {
-    my $c = shift;
+    my $c    = shift;
+    my $fdat = shift || $c->request->parameters;
+
     $c->response->output(
         HTML::FillInForm->new->fill(
-            scalarref => \$c->res->{body},
-            fdat      => $c->req->params
+            scalarref => \$c->response->{body},
+            fdat      => $fdat
         )
     );
 }

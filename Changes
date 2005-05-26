@@ -1,13 +1,16 @@
 Revision history for Perl extension Catalyst::Plugin::FillInForm.
 
-0.04  Mon Apr 18 23:00:00 2005
+0.05  2005-05-26 14:43:00
+        - $c->fillform now takes an optional hashref
+
+0.04  2005-04-18 23:00:00
         - fixed some renaming issues
 
-0.03  Fri Apr 15 16:12:00 2005
+0.03  2005-04-15 16:12:00
         - Added pod tests
         - Extended documentation.
-0.02  Thu Feb 03 02:00:00 2005
+0.02  2005-02-03 02:00:00 
         - $c->stash->{error} support
 
-0.01  Fri Jan 28 22:00:00 2005
+0.01  2005-01-28 22:00:00 
         - first release
