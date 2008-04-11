@@ -4,7 +4,7 @@ use strict;
 use NEXT;
 use HTML::FillInForm;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 =head1 NAME
 
@@ -89,19 +89,47 @@ rendered. A typical way of using it is to place it immediately
 after your C<forward> call to your view class, which might be
 in a built-in C<end> action in your application class.
 
+You can also hand in a hashref of additional params for
+HTML::FillInForm->fill() if you like.  Explicitly providing a
+\%data_hash is mandatory for this use case.
+
+    $c->fillform( $c->req->parameters, {
+       ignore_fields => [ 'pagesrc', 'pagedst' ],
+       fill_password => 0,
+    } );
+
 =cut
 
 sub fillform {
     my $c    = shift;
     my $fdat = shift || $c->request->parameters;
+    my $additional_params = shift;
 
     $c->response->output(
         HTML::FillInForm->new->fill(
             scalarref => \$c->response->{body},
-            fdat      => $fdat
+            fdat      => $fdat,
+            %$additional_params,
         )
     );
 }
+
+=head1 NOTES
+
+This class does not play well with Catalyst's ActionClass('RenderView')
+so you may want to check your C<end> method (in MyApp.pm or perhaps
+Controller/Root.pm). If it looks like this:
+
+     sub end : ActionClass('RenderView') {}
+
+Then you'll need to change it to something like this:
+
+     sub end : Private {
+        my ($self, $c) = @_;
+        $c->forward('render');
+        $c->fillform($c->req->params);
+     }
+     sub render : ActionClass('RenderView') { }
 
 =head1 SEE ALSO
 
@@ -112,6 +140,7 @@ L<Catalyst>, L<Catalyst::Plugin::FormValidator>, L<HTML::FillInForm>.
 Sebastian Riedel, C<sri@cpan.org>
 Marcus Ramberg, C<mramberg@cpan.org>
 Jesse Sheidlower, C<jester@panix.com>
+Jay Hannah, C<jay@jays.net>
 
 =head1 COPYRIGHT
 

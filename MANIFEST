@@ -7,3 +7,11 @@ README
 t/01use.t
 t/02pod.t
 t/03podcoverage.t
+t/04fillform1.t
+t/04fillform2.t
+t/04fillform3.t
+t/04fillform4.t
+t/lib/TestApp1.pm
+t/lib/TestApp2.pm
+t/lib/TestApp3.pm
+t/lib/TestApp4.pm
