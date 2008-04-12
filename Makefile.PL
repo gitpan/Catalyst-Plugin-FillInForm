@@ -1,11 +1,12 @@
-use ExtUtils::MakeMaker;
+use inc::Module::Install;
+use strict;
 
-WriteMakefile(
-    NAME      => 'Catalyst::Plugin::FillInForm',
-    AUTHOR    => 'Sebastian Riedel (sri@oook.de)',
-    PREREQ_PM => {
-        Catalyst         => '2.99',
-        HTML::FillInForm => 0
-    },
-    VERSION_FROM => 'FillInForm.pm'
-);
+name 'Catalyst-Plugin-FillInForm';
+all_from  'lib/Catalyst/Plugin/FillInForm.pm';
+
+requires 'Catalyst' => '5.7012';
+requires 'HTML::FillInform';
+
+build_requires 'Catalyst::Action::RenderView';
+
+WriteAll();
