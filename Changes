@@ -1,5 +1,7 @@
 Revision history for Perl extension Catalyst::Plugin::FillInForm.
 
+0.09  2008-04-29 11:48:00
+        - PREREQS typo
 0.08  2008-04-12 13:16:00
         - Updated to Module::Install;
         - Added build_requires RenderView
