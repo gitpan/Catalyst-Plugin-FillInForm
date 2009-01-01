@@ -1,10 +1,15 @@
 Revision history for Perl extension Catalyst::Plugin::FillInForm.
 
+0.10  2009-01-01 13:08:00
+        - Suppress potential HTML::FillInForm warning (jhannah)
+
 0.09  2008-04-29 11:48:00
         - PREREQS typo
+
 0.08  2008-04-12 13:16:00
         - Updated to Module::Install;
         - Added build_requires RenderView
+
 0.07  2008-04-11 21:49:00
         - Changed all references of output -> body.
         - Added tests & docs (jhannah)
@@ -21,6 +26,7 @@ Revision history for Perl extension Catalyst::Plugin::FillInForm.
 0.03  2005-04-15 16:12:00
         - Added pod tests
         - Extended documentation.
+
 0.02  2005-02-03 02:00:00 
         - $c->stash->{error} support
 

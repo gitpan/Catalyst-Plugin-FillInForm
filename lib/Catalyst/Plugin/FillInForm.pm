@@ -4,7 +4,7 @@ use strict;
 use NEXT;
 use HTML::FillInForm;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 =head1 NAME
 
@@ -17,10 +17,10 @@ Catalyst::Plugin::FillInForm - FillInForm for Catalyst
 
     # OR, manually:
 
-    # in MyApp.pm; assume $c->stash->data is seeded elsewhere
+    # in Controller/Root.pm; assume $c->stash->data is seeded elsewhere
     sub end : Private {
       my ( $self, $c ) = @_;
-      $c->forward('MyApp::V::TT') unless $c->res->output;
+      $c->forward('MyApp::View::TT') unless $c->res->output;
       $c->fillform( $c->stash->data );
       # ....
 
@@ -105,6 +105,10 @@ sub fillform {
     my $fdat = shift || $c->request->parameters;
     my $additional_params = shift;
 
+    # For whatever reason your response body is empty. So this fillform() will
+    # accomplish nothing. Skip HTML::FillInForm to avoid annoying warnings downstream. 
+    return 1 unless ($c->response->{body});
+
     $c->response->output(
         HTML::FillInForm->new->fill(
             scalarref => \$c->response->{body},
@@ -117,8 +121,8 @@ sub fillform {
 =head1 NOTES
 
 This class does not play well with Catalyst's ActionClass('RenderView')
-so you may want to check your C<end> method (in MyApp.pm or perhaps
-Controller/Root.pm). If it looks like this:
+so you may want to check your C<end> method (in Controller/Root.pm or perhaps
+MyApp.pm). If it looks like this:
 
      sub end : ActionClass('RenderView') {}
 
@@ -127,13 +131,14 @@ Then you'll need to change it to something like this:
      sub end : Private {
         my ($self, $c) = @_;
         $c->forward('render');
-        $c->fillform($c->req->params);
+        $c->fillform($c->req->params) unless $c->res->output;
      }
+
      sub render : ActionClass('RenderView') { }
 
 =head1 SEE ALSO
 
-L<Catalyst>, L<Catalyst::Plugin::FormValidator>, L<HTML::FillInForm>.
+L<Catalyst>, L<Catalyst::Plugin::FormValidator>, L<HTML::FillInForm>, L<Catalyst::Action::RenderView>.
 
 =head1 AUTHOR
 
