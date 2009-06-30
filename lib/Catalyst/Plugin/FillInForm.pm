@@ -1,10 +1,10 @@
 package Catalyst::Plugin::FillInForm;
 
 use strict;
-use NEXT;
+use MRO::Compat;
 use HTML::FillInForm;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 =head1 NAME
 
@@ -64,7 +64,7 @@ sub finalize {
           || $c->form->has_invalid
           || $c->stash->{error};
     }
-    return $c->NEXT::finalize(@_);
+    return $c->maybe::next::method(@_);
 }
 
 =head2 METHODS
@@ -114,7 +114,7 @@ sub fillform {
             scalarref => \$c->response->{body},
             fdat      => $fdat,
             %$additional_params,
-        )
+        ) || ''
     );
 }
 

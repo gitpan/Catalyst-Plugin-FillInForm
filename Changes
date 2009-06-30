@@ -1,6 +1,11 @@
 Revision history for Perl extension Catalyst::Plugin::FillInForm.
 
-0.10  2009-01-01 13:08:00
+0.11  2009-06-30 22:55:53
+        - Port from NEXT to MRO::Compat.
+        - Suppress warning in Catalyst 5.80 caused by assigning undef
+          to the body
+
+0.10  2008-12-31 17:08:00
         - Suppress potential HTML::FillInForm warning (jhannah)
 
 0.09  2008-04-29 11:48:00
