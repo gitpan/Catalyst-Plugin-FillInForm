@@ -4,7 +4,7 @@ use strict;
 use MRO::Compat;
 use HTML::FillInForm;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 =head1 NAME
 

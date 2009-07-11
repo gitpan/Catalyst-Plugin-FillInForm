@@ -35,7 +35,7 @@ my $html = <<EOT;
 EOT
 
 
-sub index : Global {
+sub index : Path {
    my ( $self, $c, $arg ) = @_;
    $c->res->body($html);
 }
